@@ -1,0 +1,762 @@
+{
+  "author": {
+    "id": "MDQ6VXNlcjExMTU4NTQ=",
+    "is_bot": false,
+    "login": "ashcoft",
+    "name": "Dony Wibowo"
+  },
+  "baseRefName": "main",
+  "body": "## Summary\n\nAdds the Sepo agent backend to this repository so `@sepo-agent` can answer, implement, review, and fix work on GitHub. This PR adds agent infrastructure only — no application source, secrets, or branch protection are changed.\n\nInstalled from the latest stable Sepo release **v0.5.0** (`self-evolving/repo`).\n\n## Required setup after merge\n\n1. Install the [Sepo GitHub App](https://github.com/apps/sepo-agent-app/installations/select_target) on this repository, or choose another auth path from the [setup guide](https://github.com/self-evolving/repo/blob/v0.5.0/.agent/docs/setup/setup-guide.md).\n2. Add at least one model-provider secret under [Actions secrets](https://github.com/ashcoft/libgen-calibre-store-plugin/settings/secrets/actions): `OPENAI_API_KEY`, `CLAUDE_CODE_OAUTH_TOKEN`, and/or `ANTHROPIC_API_KEY`.\n3. Run the [Agent / Onboarding / Check Setup](https://github.com/ashcoft/libgen-calibre-store-plugin/actions/workflows/agent-onboarding.yml) workflow.\n4. Review the Sepo setup check issue it opens and complete any remaining setup it reports.\n5. If `agent/memory` is missing, run [Agent / Memory / Initialization](https://github.com/ashcoft/libgen-calibre-store-plugin/actions/workflows/agent-memory-bootstrap.yml).\n6. Optionally run [Agent / Rubrics / Initialization](https://github.com/ashcoft/libgen-calibre-store-plugin/actions/workflows/agent-rubrics-initialization.yml) if this repo wants rubric steering.\n\nAlso confirm Issues and GitHub Actions are enabled (Settings → General → Features, Settings → Actions → General).\n\n## Source revision\n\n- `self-evolving/repo` @ `v0.5.0` (`5f7d2032080e9c0578d0e4cb3b98b2f695f33547`)\n\n## Installed files\n\n- `.agent/` — agent backend (265 files), excluding generated `.agent/dist/` and `.agent/node_modules/`.\n- `.github/` — agent workflows (28), composite actions, prompts, issue templates, and assets, merged into the existing `.github/`.\n- `.gitignore` — appended `.agent/dist/` and `.agent/node_modules/`.\n\n## Preserved / skipped\n\n- All target-owned `.github/` files preserved; the conflict audit found no source path that collides with an existing target path.\n- Root `README.md`, `AGENTS.md`, and `.skills/` were not copied (install defaults).\n- No application source changed.\n\n## Validation\n\n- `npm ci`, `npm run build`, and `npm test` pass on the source at v0.5.0 (run once against the identical payload).\n- `git diff --cached --check` is clean.\n- Conflict audit: no source `.github` path collides with an existing target path.\n\n## Skipped checks\n\n- Per-repo `.agent` build/test not rerun; the payload is byte-identical to the validated source revision.\n\n---\n_This PR was created by an AI agent (OpenHands) on behalf of @ashcoft._\n\n@ashcoft can click here to [continue refining the PR](https://app.all-hands.dev/canvas/conversations/50a1fae3-81cd-4f66-a2cf-63ef6766a7d2)\n\n<!-- Reviewable:start -->\n- - -\nThis change is [<img src=\"https://reviewable.io/review_button.svg\" height=\"34\" align=\"absmiddle\" alt=\"Reviewable\"/>](https://reviewable.io/reviews/ashcoft/libgen-calibre-store-plugin/1)\n<!-- Reviewable:end -->\n\n<!-- This is an auto-generated description by cubic. -->\n---\n## Summary by cubic\nInstalls the Sepo agent backend so `@sepo-agent` can answer, implement, review, and fix work on GitHub. This adds agent infrastructure only — no application source, secrets, or branch protection change. Extends the existing vendored-tooling exclusion so Codacy ignores the vendored Sepo paths.\n\n**Migration**\n\n- Install the Sepo GitHub App on this repository after merge.\n- Add at least one model-provider secret to Actions secrets: `OPENAI_API_KEY`, `CLAUDE_CODE_OAUTH_TOKEN`, and/or `ANTHROPIC_API_KEY`.\n- Run the Agent / Onboarding / Check Setup workflow and complete any setup it reports.\n- If `agent/memory` is missing, run Agent / Memory / Initialization.\n\n<sup>Written for commit 64930fb55a4c78bab08077e95b110535fbd2ddd0. Summary will update on new commits.</sup>\n\n<a href=\"https://cubic.dev/pr/ashcoft/libgen-calibre-store-plugin/pull/1?utm_source=github\" target=\"_blank\" rel=\"noopener noreferrer\" data-no-image-dialog=\"true\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://www.cubic.dev/buttons/review-in-cubic-dark.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://www.cubic.dev/buttons/review-in-cubic-light.svg\"><img alt=\"View guided diff\" src=\"https://www.cubic.dev/buttons/review-in-cubic-light.svg\"></picture></a>\n\n<!-- End of auto-generated description by cubic. -->\n\n\n<!-- devin-review-badge-begin -->\n\n---\n\n<a href=\"https://app.devin.ai/review/ashcoft/libgen-calibre-store-plugin/pull/1\" target=\"_blank\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://static.devin.ai/assets/gh-devin-review-dark.svg?v=4\"><img src=\"https://static.devin.ai/assets/gh-devin-review-light.svg?v=4\" alt=\"Devin Review\"></picture></a>\n<!-- devin-review-badge-end -->\n\n<!-- greptile_comment -->\n\n<!-- greptile_summary -->\n\n<h2><a href=\"https://app.greptile.com/api/retrigger?id=106964370&amp;sig=746d8ef980954b1c244939013e1b9abe4b7914e31da675c1bbe4235ffc11a308\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/RetriggerDark.svg?v=2\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/Retrigger.svg?v=2\"><img alt=\"Retrigger\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/Retrigger.svg?v=2\" align=\"right\"></picture></a><a href=\"https://app.greptile.com/-/switch-tenant?tenant=havo&amp;next=%2Fashcoft%2Flibgen-calibre-store-plugin%2Fpull%2F1&amp;utm_source=greptile_review&amp;utm_medium=github&amp;utm_campaign=view_in_greptile\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/ViewInGreptileDark.svg?v=2\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/ViewInGreptile.svg?v=2\"><img alt=\"View in Greptile\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/ViewInGreptile.svg?v=2\" align=\"right\"></picture></a>Confidence Score: 0/5</h2>\n\n<!-- greptile-risk -->\n\nThe PR needs access checks before triage and on its fallback path before it is safe to merge.\n\n<h2><a href=\"https://app.greptile.com/api/ide/codex?prompt=IMPORTANT%3A%20Work%20in%20the%20repository%20%22ashcoft%2Flibgen-calibre-store-plugin%22%20on%20the%20existing%20branch%20%22agent%2Finstall-agent-infra%22.%20Checkout%20that%20branch%20%E2%80%94%20do%20NOT%20create%20a%20new%20branch%20or%20open%20a%20new%20PR.%20Push%20your%20changes%20to%20%22agent%2Finstall-agent-infra%22.%0A%0A%23%23%23%20Issue%201%0A.github%2Fworkflows%2Fagent-router.yml%3A319-322%0AWhen%20%60AGENT_TRIAGE_MODE%3Dagent%60%2C%20anyone%20with%20a%20known%20association%2C%20including%20%60NONE%60%2C%20can%20reach%20%60Run%20dispatch%20triage%60.%20The%20workflow%20gives%20that%20model%20provider%20credentials%2C%20a%20write-capable%20GitHub%20token%2C%20and%20%60approve-all%60%20before%20checking%20%60AGENT_ACCESS_POLICY%60.%20A%20denied%20user%20can%20therefore%20spend%20provider%20credits%20and%20give%20instructions%20to%20a%20model%20with%20repository%20write%20access.%0A%0ACheck%20access%20before%20launching%20triage%2C%20and%20give%20classification%20only%20the%20access%20it%20needs.%0A%0A**How%20this%20was%20verified%3A**%20The%20context%20gate%20accepts%20%60NONE%60%2C%20and%20the%20workflow%20launches%20triage%20with%20the%20resolved%20GitHub%20token%20before%20%60Resolve%20route%60%20checks%20access.%0A%0A%23%23%23%20Issue%202%0A.agent%2Fsrc%2Fcli%2Fresolve-dispatch.ts%3A139-143%0AIf%20triage%20returns%20malformed%20JSON%20or%20an%20unsupported%20route%2C%20this%20catch%20sets%20%60route%3Danswer%60%20without%20applying%20%60AGENT_ACCESS_POLICY%60.%20A%20user%20denied%20the%20%60answer%60%20route%20can%20then%20run%20another%20paid%20model%20with%20repository%20write%20access%20instead%20of%20receiving%20the%20normal%20denial.%0A%0ARun%20the%20fallback%20through%20%60applyDispatchPolicy%60%2C%20or%20stop%20without%20launching%20another%20model.%0A%0A**How%20this%20was%20verified%3A**%20%60normalizeDispatch%60%20can%20throw%20before%20the%20access%20check%2C%20and%20the%20catch%20emits%20%60answer%60%20directly%3B%20the%20answer%20job%20runs%20on%20that%20output.%0A%0A%23%23%23%20Issue%203%0A.github%2Fworkflows%2Fagent-entrypoint.yml%3A12-13%0AMentions%20in%20fork%20PR%20titles%20or%20descriptions%20run%20through%20%60pull_request%60%2C%20which%20does%20not%20receive%20repository%20secrets.%20The%20router%20therefore%20has%20no%20provider%20credentials%2C%20even%20when%20%60AGENT_ACCESS_POLICY%60%20allows%20the%20contributor.%20Sepo%20cannot%20answer%20these%20requests.%20Use%20a%20trusted%20default-branch%20workflow%20for%20this%20path%20without%20executing%20the%20fork's%20actions%20or%20runtime.%0A%0A%23%23%23%20Issue%204%0A.github%2Factions%2Frun-agent-task%2Faction.yml%3A550-559%0ADifferent%20issues%2C%20scheduled%20syncs%2C%20and%20memory%20scans%20clone%20%60agent%2Fmemory%60%20independently.%20%60commitAndPush%60%20then%20makes%20one%20plain%20push%20without%20fetching%20and%20retrying.%20Once%20one%20run%20pushes%2C%20another%20run's%20push%20is%20rejected%20because%20its%20copy%20is%20behind.%20This%20step%20ignores%20that%20failure%2C%20so%20its%20memory%20edits%20disappear%20when%20the%20runner%20is%20cleaned%20up.%20Retry%20against%20the%20latest%20branch%20and%20preserve%20edits%20when%20conflicts%20need%20attention.%0A%0A%23%23%23%20Issue%205%0A.github%2Fworkflows%2Fagent-fix-pr.yml%3Aundefined-330%0AIf%20someone%20updates%20the%20PR%20during%20the%20agent%20run%2C%20the%20push%20correctly%20rejects%20the%20outdated%20starting%20head.%20But%20this%20handoff%20runs%20with%20%60always%28%29%60%20and%20sends%20the%20earlier%20successful%20%60progress_status%60.%20The%20orchestrator%20then%20reviews%20the%20unchanged%20remote%20branch%20and%20can%20repeat%20the%20same%20work.%20Include%20%60commit%60%20and%20%60push-head%60%20failures%20in%20%60SOURCE_CONCLUSION%60%2C%20as%20the%20status%20comment%20already%20does.%0A%0A%60%60%60suggestion%0A%20%20%20%20%20%20%20%20%20%20SOURCE_CONCLUSION%3A%20%24%7B%7B%20%28steps.commit.outcome%20%3D%3D%20'failure'%20%7C%7C%20steps.push-head.outcome%20%3D%3D%20'failure'%29%20%26%26%20'failed'%20%7C%7C%20steps.progress_status.outputs.status%20%7C%7C%20steps.response.outputs.status%20%7C%7C%20'failed'%20%7D%7D%0A%60%60%60%0A%0A%23%23%23%20Issue%206%0A.agent%2Fscripts%2Fpost-agent-verify.sh%3A18-25%0AIf%20an%20agent%20stages%20changes%20without%20committing%2C%20%60hasChanges%60%20still%20starts%20verification%2C%20but%20%60changed_files%60%20omits%20those%20files.%20The%20workflow%20YAML%20check%20and%20runtime%20build%20can%20therefore%20be%20skipped%20before%20the%20changes%20are%20published.%20Include%20%60git%20diff%20--cached%20--name-only%60%20and%20check%20staged%20whitespace%20too%2C%20so%20staging%20does%20not%20bypass%20the%20intended%20checks.%0A%0A%60%60%60suggestion%0Agit%20diff%20--check%0Agit%20diff%20--cached%20--check%0A%0Achanged_files%3D%22%24%28%0A%20%20%7B%0A%20%20%20%20printf%20'%25s%5Cn'%20%22%24history_changed_files%22%0A%20%20%20%20git%20diff%20--name-only%0A%20%20%20%20git%20diff%20--cached%20--name-only%0A%20%20%20%20git%20ls-files%20--others%20--exclude-standard%0A%20%20%7D%20%7C%20sed%20'%2F%5E%24%2Fd'%20%7C%20sort%20-u%0A%60%60%60%0A%0A---%0A%0AFor%20each%20issue%20above%2C%20determine%20whether%20it%20is%20valid%20and%20should%20be%20fixed.%20If%20so%2C%20fix%20it%20directly.&expires=1795283850&sig=abb08010543663c00b7e3ac62aa2d1c95b2b4ccf18335f10936359a9a9a6d72e&repo=ashcoft%2Flibgen-calibre-store-plugin&pr=1&platform=github\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/FixAllInCodexDark.svg?v=7\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/FixAllInCodex.svg?v=7\"><img alt=\"Fix All in Codex\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/FixAllInCodex.svg?v=7\" align=\"right\"></picture></a>Findings</h2>\n\n1. <img alt=\"P1\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p1.svg?v=9\" align=\"top\">&nbsp;<img alt=\"Security\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/Security.svg?v=2\" align=\"top\">&nbsp;**Denied users can run triage** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#discussion_r4574965806\">▶</a>\n2. <img alt=\"P1\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p1.svg?v=9\" align=\"top\">&nbsp;<img alt=\"Security\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/Security.svg?v=2\" align=\"top\">&nbsp;**Bad output bypasses access checks** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#discussion_r4574965811\">▶</a>\n3. <img alt=\"P1\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p1.svg?v=9\" align=\"top\">&nbsp;**Fork PR mentions fail** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#discussion_r4574424868\">▶</a>\n4. <img alt=\"P1\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p1.svg?v=9\" align=\"top\">&nbsp;**Concurrent saves drop memory** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#discussion_r4574424876\">▶</a>\n5. <img alt=\"P1\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p1.svg?v=9\" align=\"top\">&nbsp;**Failed pushes still trigger reviews** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#discussion_r4574424882\">▶</a>\n6. <img alt=\"P2\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p2.svg?v=9\" align=\"top\">&nbsp;**Staged edits skip checks** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#discussion_r4574424910\">▶</a>\n\n<details><summary>Fix with agent prompt</summary>\n\n`````markdown\n### Issue 1\n.github/workflows/agent-router.yml:319-322\nWhen `AGENT_TRIAGE_MODE=agent`, anyone with a known association, including `NONE`, can reach `Run dispatch triage`. The workflow gives that model provider credentials, a write-capable GitHub token, and `approve-all` before checking `AGENT_ACCESS_POLICY`. A denied user can therefore spend provider credits and give instructions to a model with repository write access.\n\nCheck access before launching triage, and give classification only the access it needs.\n\n**How this was verified:** The context gate accepts `NONE`, and the workflow launches triage with the resolved GitHub token before `Resolve route` checks access.\n\n### Issue 2\n.agent/src/cli/resolve-dispatch.ts:139-143\nIf triage returns malformed JSON or an unsupported route, this catch sets `route=answer` without applying `AGENT_ACCESS_POLICY`. A user denied the `answer` route can then run another paid model with repository write access instead of receiving the normal denial.\n\nRun the fallback through `applyDispatchPolicy`, or stop without launching another model.\n\n**How this was verified:** `normalizeDispatch` can throw before the access check, and the catch emits `answer` directly; the answer job runs on that output.\n\n### Issue 3\n.github/workflows/agent-entrypoint.yml:12-13\nMentions in fork PR titles or descriptions run through `pull_request`, which does not receive repository secrets. The router therefore has no provider credentials, even when `AGENT_ACCESS_POLICY` allows the contributor. Sepo cannot answer these requests. Use a trusted default-branch workflow for this path without executing the fork's actions or runtime.\n\n### Issue 4\n.github/actions/run-agent-task/action.yml:550-559\nDifferent issues, scheduled syncs, and memory scans clone `agent/memory` independently. `commitAndPush` then makes one plain push without fetching and retrying. Once one run pushes, another run's push is rejected because its copy is behind. This step ignores that failure, so its memory edits disappear when the runner is cleaned up. Retry against the latest branch and preserve edits when conflicts need attention.\n\n### Issue 5\n.github/workflows/agent-fix-pr.yml:undefined-330\nIf someone updates the PR during the agent run, the push correctly rejects the outdated starting head. But this handoff runs with `always()` and sends the earlier successful `progress_status`. The orchestrator then reviews the unchanged remote branch and can repeat the same work. Include `commit` and `push-head` failures in `SOURCE_CONCLUSION`, as the status comment already does.\n\n```suggestion\n          SOURCE_CONCLUSION: ${{ (steps.commit.outcome == 'failure' || steps.push-head.outcome == 'failure') && 'failed' || steps.progress_status.outputs.status || steps.response.outputs.status || 'failed' }}\n```\n\n### Issue 6\n.agent/scripts/post-agent-verify.sh:18-25\nIf an agent stages changes without committing, `hasChanges` still starts verification, but `changed_files` omits those files. The workflow YAML check and runtime build can therefore be skipped before the changes are published. Include `git diff --cached --name-only` and check staged whitespace too, so staging does not bypass the intended checks.\n\n```suggestion\ngit diff --check\ngit diff --cached --check\n\nchanged_files=\"$(\n  {\n    printf '%s\\n' \"$history_changed_files\"\n    git diff --name-only\n    git diff --cached --name-only\n    git ls-files --others --exclude-standard\n  } | sed '/^$/d' | sort -u\n```\n\n---\n\nFor each issue above, determine whether it is valid and should be fixed. If so, fix it directly.\n`````\n\n</details>\n\n<h3>Summary</h3>\n\nInstalls the Sepo backend and GitHub workflows without changing application source.\n- GitHub can route requests to the Sepo agent and its task workflows.\n\n<details open><summary><h3>Diagram</h3></summary>\n\n```mermaid\n%%{init: {'theme': 'neutral'}}%%\nflowchart TD\n  A[Mention or label] --> B[Extract request]\n  B --> C{Explicit command?}\n  C -->|Yes| E[Check route access]\n  C -->|No, agent triage enabled| D[Run triage model]\n  D --> F{Valid decision?}\n  F -->|Yes| E\n  F -->|No| G[Answer without access check]\n  E -->|Allowed| H[Run selected route]\n  E -->|Denied| I[Post denial]\n```\n</details>\n\n<!-- greptile_confidence_score:0 -->\n\n<sub>Reviews (2) · Last reviewed commit: [\"ci: exclude vendored Sepo paths from Cod...\"](https://github.com/ashcoft/libgen-calibre-store-plugin/commit/64930fb55a4c78bab08077e95b110535fbd2ddd0) · [Reviewed by Greptile](https://www.greptile.com/?utm_source=greptile_review&utm_medium=github&utm_campaign=review_public&utm_content=ashcoft/libgen-calibre-store-plugin)</sub>\n\n<!-- /greptile_comment -->",
+  "closedAt": "2026-11-14T17:59:20Z",
+  "comments": [
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmhSqRQ",
+      "author": {
+        "login": "aviator-app"
+      },
+      "authorAssociation": "NONE",
+      "body": "# Current Aviator status\n> Aviator will automatically update this comment as the status of the PR changes.\n> Comment `/aviator refresh` to force Aviator to re-examine your PR (or [learn about other `/aviator` commands](https://docs.aviator.co/reference/slash-commands)).\n\n\nThis PR was merged manually (without Aviator). Merging manually can negatively impact the performance of the queue. Consider using Aviator next time.\n\n---\n<div id=\"aviator-app-message\">\n  See the real-time status of this PR on the\n  <a class=\"promote-aviator-app\" href=\"https://app.aviator.co/repo/ashcoft/libgen-calibre-store-plugin/pull/1\" target=\"_blank\">Aviator webapp</a>.\n</div>\n\n<div id=\"chrome-ext-message\">\n  Use the <a href=\"https://chrome.google.com/webstore/detail/inoabloekooadaolcncfmpgafkgbgnif\" target='_blank'>Aviator Chrome Extension</a>\n  to see the status of your PR within GitHub.\n</div>",
+      "createdAt": "2026-11-14T15:45:53Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#issuecomment-6880012869",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmhSwmw",
+      "author": {
+        "login": "coderabbitai"
+      },
+      "authorAssociation": "NONE",
+      "body": "<!-- coderabbit-ai-generated:v1 -->\n\n<!-- This is an auto-generated comment: summarize by coderabbit.ai -->\n<!-- This is an auto-generated comment: rate limited by coderabbit.ai -->\n\n> [!IMPORTANT]\n> ## Review skipped\n> \n> Too many files!\n> \n> This PR contains 336 files, which is 236 over the limit of 100.\n> \n> To get a review, reduce the PR to 100 files or fewer by splitting it into smaller PRs or changing its base branch.\n> \n> Upgrade to a paid plan to raise the limit.\n> \n> Usage-priced reviews support at most 300 files.\n> \n> <details>\n> <summary><strong><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/cog-dark.svg\"><img src=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/cog.svg\" width=\"16\" height=\"16\" align=\"absmiddle\" alt=\"\"></picture> Run configuration</strong></summary>\n> <dl>\n> <dd>\n> <br>\n> \n> - **Source mode**: Auto\n> - **Repository**: Unavailable\n> - **Branch**: Unavailable\n> - **File**: No configuration file from this repository applied\n> - **Commit**: Unavailable\n> - **Layers**: defaults\n> - **Review profile**: CHILL\n> - **Plan**: Advanced\n> - **Run ID**: `7e53eac2-4f7d-4c10-b0be-1e1f301466ac`\n> \n> </dd>\n> </dl>\n> </details>\n> \n> <details>\n> <summary><strong><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/git-commit-horizontal-dark.svg\"><img src=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/git-commit-horizontal.svg\" width=\"16\" height=\"16\" align=\"absmiddle\" alt=\"\"></picture> Commits</strong></summary>\n> <dl>\n> <dd>\n> <br>\n> \n> Reviewing files that changed from the base of the PR and between f872bca5b582cd0f5dabe91f96c58611ec86e787 and 64930fb55a4c78bab08077e95b110535fbd2ddd0.\n> \n> </dd>\n> </dl>\n> </details>\n> \n> <details>\n> <summary><strong><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/file-minus-corner-dark.svg\"><img src=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/file-minus-corner.svg\" width=\"16\" height=\"16\" align=\"absmiddle\" alt=\"\"></picture> Files ignored due to path filters: 3</strong></summary>\n> <dl>\n> <dd>\n> <br>\n> \n> * `.agent/docs/assets/sepo-overview.png` is excluded by `!**/*.png`\n> * `.agent/package-lock.json` is excluded by `!**/package-lock.json`\n> * `.github/assets/sepo-headline.png` is excluded by `!**/*.png`\n> \n> </dd>\n> </dl>\n> </details>\n> \n> <details>\n> <summary><strong><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/file-plus-corner-dark.svg\"><img src=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/file-plus-corner.svg\" width=\"16\" height=\"16\" align=\"absmiddle\" alt=\"\"></picture> Files selected for processing: 336</strong></summary>\n> <dl>\n> <dd>\n> <br>\n> \n> * `.agent/CHANGELOG.md`\n> * `.agent/README.md`\n> * `.agent/action-templates/agent-action-template.yml`\n> * `.agent/docs/_meta.json`\n> * `.agent/docs/architecture/_meta.json`\n> * `.agent/docs/architecture/agent-orchestrator.md`\n> * `.agent/docs/architecture/goals.md`\n> * `.agent/docs/architecture/memory.md`\n> * `.agent/docs/architecture/overall-design.md`\n> * `.agent/docs/architecture/request-lifecycle.md`\n> * `.agent/docs/architecture/rubrics.md`\n> * `.agent/docs/customization/_meta.json`\n> * `.agent/docs/customization/access-policy.md`\n> * `.agent/docs/customization/configuration-list.md`\n> * `.agent/docs/customization/creating-your-own-actions.md`\n> * `.agent/docs/customization/skills.md`\n> * `.agent/docs/index.md`\n> * `.agent/docs/overview/_meta.json`\n> * `.agent/docs/overview/quick-start.md`\n> * `.agent/docs/overview/what-is-self-evolving-repo.md`\n> * `.agent/docs/setup/_meta.json`\n> * `.agent/docs/setup/index.md`\n> * `.agent/docs/setup/install-existing-repository.md`\n> * `.agent/docs/setup/self-hosted-github-action-runner.md`\n> * `.agent/docs/setup/setup-guide.md`\n> * `.agent/docs/setup/using-your-own-github-app.md`\n> * `.agent/docs/technical-details/_meta.json`\n> * `.agent/docs/technical-details/developer-notes.md`\n> * `.agent/docs/technical-details/key-concepts.md`\n> * `.agent/docs/technical-details/session-continuity.md`\n> * `.agent/docs/technical-details/versioning.md`\n> * `.agent/docs/usage/_meta.json`\n> * `.agent/docs/usage/agent-actions.md`\n> * `.agent/docs/usage/index.md`\n> * `.agent/docs/usage/internal-actions.md`\n> * `.agent/docs/usage/supported-workflows.md`\n> * `.agent/model-defaults.json`\n> * `.agent/package.json`\n> * `.agent/scripts/post-agent-verify.sh`\n> * `.agent/scripts/resolve-discussion-post-gate.sh`\n> * `.agent/scripts/resolve-pending-update-pr.sh`\n> * `.agent/scripts/resolve-scheduled-activity-gate.sh`\n> * `.agent/scripts/resolve-update-source.sh`\n> * `.agent/scripts/test/cli-cache-keys.test.cjs`\n> * `.agent/src/__tests__/acpx-adapter.test.ts`\n> * `.agent/src/__tests__/actor-association.test.ts`\n> * `.agent/src/__tests__/add-label-cli.test.ts`\n> * `.agent/src/__tests__/agent-action-expiration.test.ts`\n> * `.agent/src/__tests__/apply-project-management-labels-cli.test.ts`\n> * `.agent/src/__tests__/apply-self-improvement-decision-cli.test.ts`\n> * `.agent/src/__tests__/approval.test.ts`\n> * `.agent/src/__tests__/capture-pr-head-cli.test.ts`\n> * `.agent/src/__tests__/context.test.ts`\n> * `.agent/src/__tests__/discussion-post-gate-shell.test.ts`\n> * `.agent/src/__tests__/discussion-transcript.test.ts`\n> * `.agent/src/__tests__/discussion.test.ts`\n> * `.agent/src/__tests__/dispatch-agent-implement-cli.test.ts`\n> * `.agent/src/__tests__/dispatch-agent-orchestrator-cli.test.ts`\n> * `.agent/src/__tests__/docs-validation.test.ts`\n> * `.agent/src/__tests__/env.test.ts`\n> * `.agent/src/__tests__/envelope.test.ts`\n> * `.agent/src/__tests__/extract-context-cli.test.ts`\n> * `.agent/src/__tests__/fetch-discussion-transcript-cli.test.ts`\n> * `.agent/src/__tests__/followup-intent.test.ts`\n> * `.agent/src/__tests__/git.test.ts`\n> * `.agent/src/__tests__/github-attachment-download.test.ts`\n> * `.agent/src/__tests__/github.test.ts`\n> * `.agent/src/__tests__/handoff.test.ts`\n> * `.agent/src/__tests__/implementation-base.test.ts`\n> * `.agent/src/__tests__/install-fork-pr-cli.test.ts`\n> * `.agent/src/__tests__/install-fork-pr.test.ts`\n> * `.agent/src/__tests__/install-request.test.ts`\n> * `.agent/src/__tests__/install-target.test.ts`\n> * `.agent/src/__tests__/memory-artifacts.test.ts`\n> * `.agent/src/__tests__/memory-bootstrap-branch-cli.test.ts`\n> * `.agent/src/__tests__/memory-init-cli.test.ts`\n> * `.agent/src/__tests__/memory-policy.test.ts`\n> * `.agent/src/__tests__/memory-resolve-policy-cli.test.ts`\n> * `.agent/src/__tests__/memory-search-cli.test.ts`\n> * `.agent/src/__tests__/memory-search.test.ts`\n> * `.agent/src/__tests__/memory-sync-github-artifacts.test.ts`\n> * `.agent/src/__tests__/memory-sync-state.test.ts`\n> * `.agent/src/__tests__/memory-update-cli.test.ts`\n> * `.agent/src/__tests__/memory-update.test.ts`\n> * `.agent/src/__tests__/mentions.test.ts`\n> * `.agent/src/__tests__/onboarding-check-cli.test.ts`\n> * `.agent/src/__tests__/orchestrate-handoff-cli.test.ts`\n> * `.agent/src/__tests__/orchestrator-preflight-cli.test.ts`\n> * `.agent/src/__tests__/pending-update-pr-gate-shell.test.ts`\n> * `.agent/src/__tests__/post-comment-cli.test.ts`\n> * `.agent/src/__tests__/post-project-management-summary-cli.test.ts`\n> * `.agent/src/__tests__/post-response-cli.test.ts`\n> * `.agent/src/__tests__/prepare-release-cli.test.ts`\n> * `.agent/src/__tests__/prepare-self-approve-cli.test.ts`\n> * `.agent/src/__tests__/progress-cancel.test.ts`\n> * `.agent/src/__tests__/progress-final-comment.test.ts`\n> * `.agent/src/__tests__/progress-policy.test.ts`\n> * `.agent/src/__tests__/progress-render.test.ts`\n> * `.agent/src/__tests__/progress-report.test.ts`\n> * `.agent/src/__tests__/project-management-labels.test.ts`\n> * `.agent/src/__tests__/prompt-continuation.test.ts`\n> * `.agent/src/__tests__/reactions.test.ts`\n> * `.agent/src/__tests__/release-version.test.ts`\n> * `.agent/src/__tests__/resolve-agent-provider.test.ts`\n> * `.agent/src/__tests__/resolve-approval-cli.test.ts`\n> * `.agent/src/__tests__/resolve-dispatch-cli.test.ts`\n> * `.agent/src/__tests__/resolve-github-auth-oidc-shell.test.ts`\n> * `.agent/src/__tests__/resolve-self-approve-cli.test.ts`\n> * `.agent/src/__tests__/resolve-self-merge-cli.test.ts`\n> * `.agent/src/__tests__/resolve-task-timeout-cli.test.ts`\n> * `.agent/src/__tests__/response.test.ts`\n> * `.agent/src/__tests__/review-summary-minimize.test.ts`\n> * `.agent/src/__tests__/review-synthesis.test.ts`\n> * `.agent/src/__tests__/rubrics.test.ts`\n> * `.agent/src/__tests__/runtime-env.test.ts`\n> * `.agent/src/__tests__/runtime-state.test.ts`\n> * `.agent/src/__tests__/schedule-policy.test.ts`\n> * `.agent/src/__tests__/scheduled-activity.test.ts`\n> * `.agent/src/__tests__/self-approval.test.ts`\n> * `.agent/src/__tests__/self-improvement-requester.test.ts`\n> * `.agent/src/__tests__/self-improvement.test.ts`\n> * `.agent/src/__tests__/self-merge.test.ts`\n> * `.agent/src/__tests__/session-bundle.test.ts`\n> * `.agent/src/__tests__/session-policy.test.ts`\n> * `.agent/src/__tests__/sub-orchestration.test.ts`\n> * `.agent/src/__tests__/task-timeout-policy.test.ts`\n> * `.agent/src/__tests__/thread-state.test.ts`\n> * `.agent/src/__tests__/triage.test.ts`\n> * `.agent/src/__tests__/update-source-resolver-shell.test.ts`\n> * `.agent/src/__tests__/verify.test.ts`\n> * `.agent/src/__tests__/workflow-action-validation.test.ts`\n> * `.agent/src/access-policy.ts`\n> * `.agent/src/acpx-adapter.ts`\n> * `.agent/src/actor-association.ts`\n> * `.agent/src/answer-review-context.ts`\n> * `.agent/src/approval.ts`\n> * `.agent/src/cli/add-label.ts`\n> * `.agent/src/cli/add-reaction.ts`\n> * `.agent/src/cli/apply-project-management-labels.ts`\n> * `.agent/src/cli/apply-self-improvement-decision.ts`\n> * `.agent/src/cli/capture-pr-head.ts`\n> * `.agent/src/cli/checkout-pr.ts`\n> * `.agent/src/cli/commit.ts`\n> * `.agent/src/cli/complete-install-request.ts`\n> * `.agent/src/cli/create-discussion.ts`\n> * `.agent/src/cli/create-issue.ts`\n> * `.agent/src/cli/create-pr.ts`\n> * `.agent/src/cli/detect-head-change.ts`\n> * `.agent/src/cli/dispatch-agent-implement.ts`\n> * `.agent/src/cli/dispatch-agent-orchestrator.ts`\n> * `.agent/src/cli/download-github-attachment.ts`\n> * `.agent/src/cli/extract-context.ts`\n> * `.agent/src/cli/fetch-discussion-transcript.ts`\n> * `.agent/src/cli/install-fork-pr.ts`\n> * `.agent/src/cli/memory/bootstrap-branch.ts`\n> * `.agent/src/cli/memory/init.ts`\n> * `.agent/src/cli/memory/read-sync-state.ts`\n> * `.agent/src/cli/memory/resolve-policy.ts`\n> * `.agent/src/cli/memory/search.ts`\n> * `.agent/src/cli/memory/sync-github-artifacts.ts`\n> * `.agent/src/cli/memory/update.ts`\n> * `.agent/src/cli/memory/write-sync-state.ts`\n> * `.agent/src/cli/onboarding-check.ts`\n> * `.agent/src/cli/orchestrate-handoff.ts`\n> * `.agent/src/cli/orchestrator-preflight.ts`\n> * `.agent/src/cli/parse-response.ts`\n> * `.agent/src/cli/post-comment.ts`\n> * `.agent/src/cli/post-project-management-summary.ts`\n> * `.agent/src/cli/post-response.ts`\n> * `.agent/src/cli/prepare-approval.ts`\n> * `.agent/src/cli/prepare-release.ts`\n> * `.agent/src/cli/prepare-rubrics-update-summary.ts`\n> * `.agent/src/cli/prepare-self-approve.ts`\n> * `.agent/src/cli/progress-report.ts`\n> * `.agent/src/cli/progress/resolve-policy.ts`\n> * `.agent/src/cli/push-pr-head.ts`\n> * `.agent/src/cli/resolve-approval.ts`\n> * `.agent/src/cli/resolve-dispatch.ts`\n> * `.agent/src/cli/resolve-implementation-base.ts`\n> * `.agent/src/cli/resolve-install-target.ts`\n> * `.agent/src/cli/resolve-progress-status.ts`\n> * `.agent/src/cli/resolve-scheduled-activity-gate.ts`\n> * `.agent/src/cli/resolve-self-approve.ts`\n> * `.agent/src/cli/resolve-self-improvement-requester.ts`\n> * `.agent/src/cli/resolve-self-merge.ts`\n> * `.agent/src/cli/resolve-task-timeout.ts`\n> * `.agent/src/cli/rubrics/init.ts`\n> * `.agent/src/cli/rubrics/resolve-policy.ts`\n> * `.agent/src/cli/rubrics/select.ts`\n> * `.agent/src/cli/rubrics/validate.ts`\n> * `.agent/src/cli/session-backup.ts`\n> * `.agent/src/cli/session-register.ts`\n> * `.agent/src/cli/session-restore.ts`\n> * `.agent/src/cli/update-approval-comment.ts`\n> * `.agent/src/cli/verify.ts`\n> * `.agent/src/cli/write-scheduled-state.ts`\n> * `.agent/src/context.ts`\n> * `.agent/src/discussion-transcript.ts`\n> * `.agent/src/discussion.ts`\n> * `.agent/src/env.ts`\n> * `.agent/src/envelope.ts`\n> * `.agent/src/fix-pr-status.ts`\n> * `.agent/src/followup-intent.ts`\n> * `.agent/src/git.ts`\n> * `.agent/src/github-attachment-download.ts`\n> * `.agent/src/github-graphql.ts`\n> * `.agent/src/github.ts`\n> * `.agent/src/handoff.ts`\n> * `.agent/src/implementation-base.ts`\n> * `.agent/src/install-fork-pr.ts`\n> * `.agent/src/install-request.ts`\n> * `.agent/src/install-target.ts`\n> * `.agent/src/memory-artifacts.ts`\n> * `.agent/src/memory-policy.ts`\n> * `.agent/src/memory-search.ts`\n> * `.agent/src/memory-sync-state.ts`\n> * `.agent/src/memory-update.ts`\n> * `.agent/src/mentions.ts`\n> * `.agent/src/onboarding.ts`\n> * `.agent/src/orchestrator-capabilities.ts`\n> * `.agent/src/output.ts`\n> * `.agent/src/progress-cancel.ts`\n> * `.agent/src/progress-final-comment.ts`\n> * `.agent/src/progress-policy.ts`\n> * `.agent/src/progress-render.ts`\n> * `.agent/src/project-management-labels.ts`\n> * `.agent/src/prompt-continuation.ts`\n> * `.agent/src/reactions.ts`\n> * `.agent/src/release-version.ts`\n> * `.agent/src/respond.ts`\n> * `.agent/src/response.ts`\n> * `.agent/src/review-summary-minimize.ts`\n> * `.agent/src/review-synthesis.ts`\n> * `.agent/src/rubrics-policy.ts`\n> * `.agent/src/rubrics.ts`\n> * `.agent/src/run.ts`\n> * `.agent/src/runtime-env.ts`\n> * `.agent/src/runtime-state.ts`\n> * `.agent/src/schedule-policy.ts`\n> * `.agent/src/scheduled-activity.ts`\n> * `.agent/src/self-approval.ts`\n> * `.agent/src/self-improvement-requester.ts`\n> * `.agent/src/self-improvement.ts`\n> * `.agent/src/self-merge.ts`\n> * `.agent/src/session-bundle.ts`\n> * `.agent/src/session-policy.ts`\n> * `.agent/src/sub-orchestration.ts`\n> * `.agent/src/task-timeout-policy.ts`\n> * `.agent/src/thread-state.ts`\n> * `.agent/src/triage.ts`\n> * `.agent/src/trigger-labels.ts`\n> * `.agent/src/verify.ts`\n> * `.agent/tools/local-runner/.gitignore`\n> * `.agent/tools/local-runner/README.md`\n> * `.agent/tools/local-runner/bootstrap.sh`\n> * `.agent/tools/local-runner/check-requirements.sh`\n> * `.agent/tools/local-runner/cleanup-runner.sh`\n> * `.agent/tools/local-runner/com.local-runner.cleanup.plist.template`\n> * `.agent/tools/local-runner/hooks/post-job-cleanup.sh`\n> * `.agent/tools/local-runner/setup-runners.sh`\n> * `.agent/tools/local-runner/start-runners.sh`\n> * `.agent/tools/local-runner/stop-runners.sh`\n> * `.agent/tsconfig.json`\n> * `.codacy.yml`\n> * `.github/ISSUE_TEMPLATE/agent-goal.yml`\n> * `.github/ISSUE_TEMPLATE/ask-sepo.md`\n> * `.github/ISSUE_TEMPLATE/install-sepo.md`\n> * `.github/actions/check-agent-action-expiration/action.yml`\n> * `.github/actions/check-agent-action-expiration/check-expiration.sh`\n> * `.github/actions/discussion-post-gate/action.yml`\n> * `.github/actions/download-agent-memory/action.yml`\n> * `.github/actions/download-agent-rubrics/action.yml`\n> * `.github/actions/resolve-agent-provider/action.yml`\n> * `.github/actions/resolve-agent-provider/resolve-provider.js`\n> * `.github/actions/resolve-github-auth/action.yml`\n> * `.github/actions/resolve-github-auth/exchange-oidc.sh`\n> * `.github/actions/run-agent-task/action.yml`\n> * `.github/actions/run-skill-setup/action.yml`\n> * `.github/actions/scheduled-activity-gate/action.yml`\n> * `.github/actions/setup-agent-runtime/action.yml`\n> * `.github/prompts/_base.md`\n> * `.github/prompts/_memory.md`\n> * `.github/prompts/_rubrics.md`\n> * `.github/prompts/agent-add-rubrics.md`\n> * `.github/prompts/agent-answer.md`\n> * `.github/prompts/agent-create-action.md`\n> * `.github/prompts/agent-dispatch.md`\n> * `.github/prompts/agent-fix-pr.md`\n> * `.github/prompts/agent-implement-metadata.md`\n> * `.github/prompts/agent-implement.md`\n> * `.github/prompts/agent-install.md`\n> * `.github/prompts/agent-issue-enhance.md`\n> * `.github/prompts/agent-orchestrator.md`\n> * `.github/prompts/agent-release.md`\n> * `.github/prompts/agent-self-approve.md`\n> * `.github/prompts/agent-self-improvement.md`\n> * `.github/prompts/agent-update.md`\n> * `.github/prompts/daily-summary.md`\n> * `.github/prompts/followup-intent.md`\n> * `.github/prompts/memory-pr-closed.md`\n> * `.github/prompts/memory-scan.md`\n> * `.github/prompts/project-manager.md`\n> * `.github/prompts/review-synthesize-finalize.md`\n> * `.github/prompts/review-synthesize.md`\n> * `.github/prompts/review.md`\n> * `.github/prompts/rubrics-initialization.md`\n> * `.github/prompts/rubrics-review.md`\n> * `.github/prompts/rubrics-update.md`\n> * `.github/workflows/agent-approve.yml`\n> * `.github/workflows/agent-branch-cleanup.yml`\n> * `.github/workflows/agent-cache-seed.yml`\n> * `.github/workflows/agent-close-stale-issues.yml`\n> * `.github/workflows/agent-daily-summary.yml`\n> * `.github/workflows/agent-entrypoint.yml`\n> * `.github/workflows/agent-fix-pr.yml`\n> * `.github/workflows/agent-implement.yml`\n> * `.github/workflows/agent-label.yml`\n> * `.github/workflows/agent-memory-bootstrap.yml`\n> * `.github/workflows/agent-memory-pr-closed.yml`\n> * `.github/workflows/agent-memory-scan.yml`\n> * `.github/workflows/agent-memory-sync.yml`\n> * `.github/workflows/agent-onboarding.yml`\n> * `.github/workflows/agent-orchestrator.yml`\n> * `.github/workflows/agent-project-manager.yml`\n> * `.github/workflows/agent-release-prepare.yml`\n> * `.github/workflows/agent-review.yml`\n> * `.github/workflows/agent-router.yml`\n> * `.github/workflows/agent-rubrics-initialization.yml`\n> * `.github/workflows/agent-rubrics-review.yml`\n> * `.github/workflows/agent-rubrics-update.yml`\n> * `.github/workflows/agent-self-approve.yml`\n> * `.github/workflows/agent-self-improvement.yml`\n> * `.github/workflows/agent-self-merge.yml`\n> * `.github/workflows/agent-update.yml`\n> * `.github/workflows/test-scripts.yml`\n> * `.gitignore`\n> \n> </dd>\n> </dl>\n> </details>\n> \n> You can disable this status message by setting the `reviews.review_status` to `false` in the CodeRabbit configuration file.\n\n<!-- end of auto-generated comment: rate limited by coderabbit.ai -->\n\n<!-- autopilot:start -->\n- [ ] <!-- {\"checkboxId\":\"2708ad07-9f24-4260-9c11-7dc76a49f2e3\"} --> <strong title=\"Keep fixing CodeRabbit findings and required CI, and resolving merge conflicts\">Autofix</strong> · Keep fixing CodeRabbit findings and required CI, and resolving merge conflicts\n<!-- autopilot:end -->\n<!-- tips_start -->\n\n\n\nThanks for using [CodeRabbit](https://coderabbit.ai?utm_source=oss&utm_medium=github&utm_campaign=ashcoft/libgen-calibre-store-plugin&utm_content=1)! It's free for OSS, and your support helps us grow. If you like it, consider giving us a shout-out.\n\n<details>\n<summary><strong>Share</strong></summary>\n<dl>\n<dd>\n<br>\n\n- [X](https://twitter.com/intent/tweet?text=I%20just%20used%20%40coderabbitai%20for%20my%20code%20review%2C%20and%20it%27s%20fantastic%21%20It%27s%20free%20for%20OSS%20and%20offers%20a%20free%20trial%20for%20the%20proprietary%20code.%20Check%20it%20out%3A&url=https%3A//coderabbit.ai)\n- [Mastodon](https://mastodon.social/share?text=I%20just%20used%20%40coderabbitai%20for%20my%20code%20review%2C%20and%20it%27s%20fantastic%21%20It%27s%20free%20for%20OSS%20and%20offers%20a%20free%20trial%20for%20the%20proprietary%20code.%20Check%20it%20out%3A%20https%3A%2F%2Fcoderabbit.ai)\n- [Reddit](https://www.reddit.com/submit?title=Great%20tool%20for%20code%20review%20-%20CodeRabbit&text=I%20just%20used%20CodeRabbit%20for%20my%20code%20review%2C%20and%20it%27s%20fantastic%21%20It%27s%20free%20for%20OSS%20and%20offers%20a%20free%20trial%20for%20proprietary%20code.%20Check%20it%20out%3A%20https%3A//coderabbit.ai)\n- [LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcoderabbit.ai&mini=true&title=Great%20tool%20for%20code%20review%20-%20CodeRabbit&summary=I%20just%20used%20CodeRabbit%20for%20my%20code%20review%2C%20and%20it%27s%20fantastic%21%20It%27s%20free%20for%20OSS%20and%20offers%20a%20free%20trial%20for%20proprietary%20code)\n\n</dd>\n</dl>\n</details>\n\n<!-- tips_end -->",
+      "createdAt": "2026-11-14T15:45:59Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#issuecomment-6880014491",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmhUAow",
+      "author": {
+        "login": "codacy-production"
+      },
+      "authorAssociation": "NONE",
+      "body": "## Up to standards :white_check_mark:\n<details><summary><strong>🟢 Issues</strong>  <code>0 issues</code></summary>\n\n> <br/>\n>\n> \n>\n> **Results:**\n> `0` new issues\n>\n>\n>\n> [View in Codacy](https://app.codacy.com/gh/ashcoft/libgen-calibre-store-plugin/pull-requests/1/issues)\n> <br/>\n</details>\n\n\n\n\n\n\n\n<sub>`NEW` Get contextual insights on your PRs based on Codacy's metrics, along with PR and Jira context, without leaving GitHub. [Enable AI reviewer](https://app.codacy.com/organizations/gh/ashcoft/integrations/provider)</sub>\n<sub>`TIP` This summary will be updated as you push new changes.</sub>\n\n<!-- a1b2c3d4-e5f6-7890-abcd-ef1234567890 -->",
+      "createdAt": "2026-11-14T15:47:12Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#issuecomment-6880034979",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmipTdQ",
+      "author": {
+        "login": "mergify"
+      },
+      "authorAssociation": "NONE",
+      "body": "Queue requested — the merge queue status continues in [this comment ↓](https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#issuecomment-6881839395).",
+      "createdAt": "2026-11-14T17:26:38Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#issuecomment-6881432437",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmjCJIw",
+      "author": {
+        "login": "mergify"
+      },
+      "authorAssociation": "NONE",
+      "body": "<!---\nDO NOT EDIT\n-*- Mergify Payload -*-\n{\"version\": 1, \"state\": \"merged\", \"queue_rule_name\": \"default\", \"queued_at\": \"2026-11-14T17:59:05.202324+00:00\", \"estimated_time_of_merge\": null, \"speculative_check_pr\": null, \"required_conditions\": [], \"left_at\": \"2026-11-14T17:59:22.104234+00:00\"}\n-*- Mergify Payload End -*-\n-->\n\n### ✅ Merged into `main` as `82cfedb` at 17:59 UTC\n\nLess than a minute in the queue, with no time running CI.\n\n**So far**\n\n- ✅ **Entered the queue** Sat 14 Nov, 17:59 · rule `default` · triggered by @ashcoft with the [merge queue checkbox](https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#issuecomment-6881432437)\n- ✅ **Checks skipped** · PR is already up-to-date\n- ✅ **Merged** 17:59 · `82cfedb`\n\n<sub>Times in UTC · [dashboard](https://dashboard.mergify.com/orgs/ashcoft/repos/libgen-calibre-store-plugin/queues/status?branch=main&pull=1) · [how the merge queue works](https://docs.mergify.com/merge-queue/)</sub>",
+      "createdAt": "2026-11-14T17:59:06Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1#issuecomment-6881839395",
+      "viewerDidAuthor": false
+    }
+  ],
+  "createdAt": "2026-11-14T15:45:49Z",
+  "files": [
+    {
+      "path": ".agent/CHANGELOG.md",
+      "additions": 107,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/README.md",
+      "additions": 9,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/action-templates/agent-action-template.yml",
+      "additions": 124,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/_meta.json",
+      "additions": 11,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/architecture/_meta.json",
+      "additions": 11,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/architecture/agent-orchestrator.md",
+      "additions": 201,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/architecture/goals.md",
+      "additions": 70,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/architecture/memory.md",
+      "additions": 220,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/architecture/overall-design.md",
+      "additions": 85,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/architecture/request-lifecycle.md",
+      "additions": 63,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/architecture/rubrics.md",
+      "additions": 138,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/assets/sepo-overview.png",
+      "additions": 0,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/customization/_meta.json",
+      "additions": 9,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/customization/access-policy.md",
+      "additions": 98,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/customization/configuration-list.md",
+      "additions": 105,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/customization/creating-your-own-actions.md",
+      "additions": 50,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/customization/skills.md",
+      "additions": 80,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/index.md",
+      "additions": 137,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/overview/_meta.json",
+      "additions": 7,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/overview/quick-start.md",
+      "additions": 56,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/overview/what-is-self-evolving-repo.md",
+      "additions": 30,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/setup/_meta.json",
+      "additions": 9,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/setup/index.md",
+      "additions": 13,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/setup/install-existing-repository.md",
+      "additions": 232,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/setup/self-hosted-github-action-runner.md",
+      "additions": 30,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/setup/setup-guide.md",
+      "additions": 133,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/setup/using-your-own-github-app.md",
+      "additions": 24,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/technical-details/_meta.json",
+      "additions": 9,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/technical-details/developer-notes.md",
+      "additions": 45,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/technical-details/key-concepts.md",
+      "additions": 140,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/technical-details/session-continuity.md",
+      "additions": 120,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/technical-details/versioning.md",
+      "additions": 38,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/usage/_meta.json",
+      "additions": 8,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/usage/agent-actions.md",
+      "additions": 155,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/usage/index.md",
+      "additions": 23,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/usage/internal-actions.md",
+      "additions": 19,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/docs/usage/supported-workflows.md",
+      "additions": 423,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/model-defaults.json",
+      "additions": 15,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/package-lock.json",
+      "additions": 1159,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/package.json",
+      "additions": 25,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/scripts/post-agent-verify.sh",
+      "additions": 45,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/scripts/resolve-discussion-post-gate.sh",
+      "additions": 143,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/scripts/resolve-pending-update-pr.sh",
+      "additions": 120,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/scripts/resolve-scheduled-activity-gate.sh",
+      "additions": 287,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/scripts/resolve-update-source.sh",
+      "additions": 148,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/scripts/test/cli-cache-keys.test.cjs",
+      "additions": 103,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/acpx-adapter.test.ts",
+      "additions": 1025,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/actor-association.test.ts",
+      "additions": 147,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/add-label-cli.test.ts",
+      "additions": 146,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/agent-action-expiration.test.ts",
+      "additions": 74,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/apply-project-management-labels-cli.test.ts",
+      "additions": 264,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/apply-self-improvement-decision-cli.test.ts",
+      "additions": 539,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/approval.test.ts",
+      "additions": 233,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/capture-pr-head-cli.test.ts",
+      "additions": 46,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/context.test.ts",
+      "additions": 263,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/discussion-post-gate-shell.test.ts",
+      "additions": 132,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/discussion-transcript.test.ts",
+      "additions": 236,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/discussion.test.ts",
+      "additions": 122,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/dispatch-agent-implement-cli.test.ts",
+      "additions": 53,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/dispatch-agent-orchestrator-cli.test.ts",
+      "additions": 112,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/docs-validation.test.ts",
+      "additions": 170,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/env.test.ts",
+      "additions": 24,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/envelope.test.ts",
+      "additions": 2905,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/extract-context-cli.test.ts",
+      "additions": 1361,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/fetch-discussion-transcript-cli.test.ts",
+      "additions": 162,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/followup-intent.test.ts",
+      "additions": 115,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/git.test.ts",
+      "additions": 25,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/github-attachment-download.test.ts",
+      "additions": 274,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/github.test.ts",
+      "additions": 116,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/handoff.test.ts",
+      "additions": 947,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/implementation-base.test.ts",
+      "additions": 108,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/install-fork-pr-cli.test.ts",
+      "additions": 114,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/install-fork-pr.test.ts",
+      "additions": 896,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/install-request.test.ts",
+      "additions": 125,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/install-target.test.ts",
+      "additions": 43,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-artifacts.test.ts",
+      "additions": 67,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-bootstrap-branch-cli.test.ts",
+      "additions": 151,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-init-cli.test.ts",
+      "additions": 54,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-policy.test.ts",
+      "additions": 98,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-resolve-policy-cli.test.ts",
+      "additions": 22,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-search-cli.test.ts",
+      "additions": 25,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-search.test.ts",
+      "additions": 123,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-sync-github-artifacts.test.ts",
+      "additions": 210,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-sync-state.test.ts",
+      "additions": 69,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-update-cli.test.ts",
+      "additions": 74,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/memory-update.test.ts",
+      "additions": 192,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/mentions.test.ts",
+      "additions": 37,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/onboarding-check-cli.test.ts",
+      "additions": 272,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/orchestrate-handoff-cli.test.ts",
+      "additions": 1852,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/orchestrator-preflight-cli.test.ts",
+      "additions": 162,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/pending-update-pr-gate-shell.test.ts",
+      "additions": 116,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/post-comment-cli.test.ts",
+      "additions": 445,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/post-project-management-summary-cli.test.ts",
+      "additions": 99,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/post-response-cli.test.ts",
+      "additions": 392,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/prepare-release-cli.test.ts",
+      "additions": 169,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/prepare-self-approve-cli.test.ts",
+      "additions": 297,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/progress-cancel.test.ts",
+      "additions": 81,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/progress-final-comment.test.ts",
+      "additions": 30,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/progress-policy.test.ts",
+      "additions": 191,
+      "deletions": 0,
+      "changeType": "ADDED"
+    },
+    {
+      "path": ".agent/src/__tests__/progress-render.test.ts",
+      "additions": 347,
+      "deletions": 0,
+      "changeType": "ADDED"
+    }
+  ],
+  "headRefName": "agent/install-agent-infra",
+  "labels": [],
+  "mergedAt": "2026-11-14T17:59:19Z",
+  "number": 1,
+  "reviewDecision": "",
+  "reviews": [
+    {
+      "id": "PRR_kwDOOsV3ms8AAAABX_8Zuw",
+      "author": {
+        "login": "sourcery-ai"
+      },
+      "authorAssociation": "NONE",
+      "body": "**Sorry @ashcoft, this pull request is too large to review**\n\nIt changes 338 files. Sourcery can review pull requests with up to 300 changed files.",
+      "submittedAt": "2026-11-14T15:45:54Z",
+      "includesCreatedEdit": false,
+      "reactionGroups": [],
+      "state": "COMMENTED",
+      "commit": {
+        "oid": "096cd3848944cdcbf3b9496ab82eed555b3dcc54"
+      }
+    },
+    {
+      "id": "PRR_kwDOOsV3ms8AAAABX_-Bpg",
+      "author": {
+        "login": "greptile-apps"
+      },
+      "authorAssociation": "NONE",
+      "body": "",
+      "submittedAt": "2026-11-14T15:49:22Z",
+      "includesCreatedEdit": false,
+      "reactionGroups": [],
+      "state": "COMMENTED",
+      "commit": {
+        "oid": "096cd3848944cdcbf3b9496ab82eed555b3dcc54"
+      }
+    },
+    {
+      "id": "PRR_kwDOOsV3ms8AAAABYAeWcA",
+      "author": {
+        "login": "sourcery-ai"
+      },
+      "authorAssociation": "NONE",
+      "body": "**Sorry @ashcoft, this pull request is too large to review**\n\nIt changes 338 files. Sourcery can review pull requests with up to 300 changed files.",
+      "submittedAt": "2026-11-14T17:26:09Z",
+      "includesCreatedEdit": false,
+      "reactionGroups": [],
+      "state": "COMMENTED",
+      "commit": {
+        "oid": "096cd3848944cdcbf3b9496ab82eed555b3dcc54"
+      }
+    },
+    {
+      "id": "PRR_kwDOOsV3ms8AAAABYAlrKg",
+      "author": {
+        "login": "greptile-apps"
+      },
+      "authorAssociation": "NONE",
+      "body": "",
+      "submittedAt": "2026-11-14T17:57:29Z",
+      "includesCreatedEdit": false,
+      "reactionGroups": [],
+      "state": "COMMENTED",
+      "commit": {
+        "oid": "64930fb55a4c78bab08077e95b110535fbd2ddd0"
+      }
+    }
+  ],
+  "state": "MERGED",
+  "title": "Install Sepo agent infrastructure",
+  "updatedAt": "2026-11-14T17:59:31Z",
+  "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/1"
+}
