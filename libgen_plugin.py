@@ -18,7 +18,6 @@ from calibre.gui2.store import StorePlugin
 from calibre.gui2.store.basic_config import BasicStoreConfig, BasicStoreConfigWidget
 from calibre.gui2.store.search_result import SearchResult
 from calibre.gui2.store.web_store_dialog import WebStoreDialog
-from urllib.request import urlopen
 
 # Live instances can be checked at https://open-slum.org
 SPA_MIRRORS = [
@@ -245,16 +244,19 @@ def check_url(mirrors):
         try:
             if check_spa_api(mirror):
                 return mirror
-        except Exception:
-            continue
+        except Exception as error:
+            logger.info("Mirror %s failed the API health check: %s", mirror, error)
 
+    br = browser(user_agent=USER_AGENT)
     for mirror in legacy_mirrors:
         try:
-            with urlopen(mirror, timeout=5) as response:
+            with closing(br.open(mirror, timeout=5)) as response:
                 if response.code == 200:
                     return mirror
-        except Exception:
-            continue
+        except Exception as error:
+            logger.info("Mirror %s failed the health check: %s", mirror, error)
+
+    return None
 
 def extract_indices(soup):
     elements = ["Author(s)", "Year", "Pages", "Size", "Ext", "Mirrors"]
