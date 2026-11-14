@@ -8,7 +8,8 @@
         "command": "python -m compileall -q -f __init__.py libgen_plugin.py"
       },
       "cache": true,
-      "inputs": ["{projectRoot}/**/*.py"]
+      "inputs": ["{projectRoot}/**/*.py"],
+      "outputs": ["{projectRoot}/__pycache__"]
     }
   }
 }
