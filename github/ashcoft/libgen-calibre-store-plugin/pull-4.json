@@ -1,0 +1,124 @@
+{
+  "author": {
+    "is_bot": true,
+    "login": "app/mergify"
+  },
+  "baseRefName": "main",
+  "body": "> [!NOTE]\n> **This is a merge queue draft opened by Mergify. Its pull request has merged, and nobody needs to act on it.**\n> Mergify opened it for batch **content-magret-2acrpp** of the `default` queue, to test [#3](/ashcoft/libgen-calibre-store-plugin/pull/3) before it merged into `main`.\n\n### 🎉 What landed\n\nMergify merged its pull request into `main`, then closed this draft:\n\n- [#3](/ashcoft/libgen-calibre-store-plugin/pull/3) Support alternate LibGen mirrors and tagged releases (ashcoft), as [`6eff18e`](/ashcoft/libgen-calibre-store-plugin/commit/6eff18eebf342c1cf9fe8ac6e22fa9e0e12272d2)\n\nThis draft's code was built in this order:\n\n1. `main` at [`82cfedb`](/ashcoft/libgen-calibre-store-plugin/commit/82cfedbac5b830a443d2ca8319d1313308a75e90)\n2. [#3](/ashcoft/libgen-calibre-store-plugin/pull/3), the pull request of this batch\n\n<details>\n<summary>Metadata for CI tooling, read by <code>mergify ci</code></summary>\n\n```yaml\n---\nall_scopes: false\nchecking_base_sha: 82cfedbac5b830a443d2ca8319d1313308a75e90\nprevious_check_retries: []\nprevious_failed_batches: []\npull_requests:\n  - number: 3\n    scopes: []\nscopes: []\n...\n\n```\n\n</details>\n\n<details>\n<summary>Required conditions of queue rule <code>default</code> for merge</summary>\n\nNo extra conditions.\n\n</details>\n\n<details>\n<summary>Required conditions to stay in the queue</summary>\n\nNone\n\n</details>\n\n<!-- Reviewable:start -->\n- - -\nThis change is [<img src=\"https://reviewable.io/review_button.svg\" height=\"34\" align=\"absmiddle\" alt=\"Reviewable\"/>](https://reviewable.io/reviews/ashcoft/libgen-calibre-store-plugin/4)\n<!-- Reviewable:end -->\n\n\n<!-- greptile_comment -->\n\n<!-- greptile_summary -->\n\n<h2><a href=\"https://app.greptile.com/api/retrigger?id=107291566&amp;sig=acfef718c8eb2fe2c216c120bc9e9a3b4b450ae02f2d2fcc8525af8a66bde2bd\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/RetriggerDark.svg?v=2\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/Retrigger.svg?v=2\"><img alt=\"Retrigger\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/Retrigger.svg?v=2\" align=\"right\"></picture></a><a href=\"https://app.greptile.com/-/switch-tenant?tenant=havo&amp;next=%2Fashcoft%2Flibgen-calibre-store-plugin%2Fpull%2F4&amp;utm_source=greptile_review&amp;utm_medium=github&amp;utm_campaign=view_in_greptile\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/ViewInGreptileDark.svg?v=2\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/ViewInGreptile.svg?v=2\"><img alt=\"View in Greptile\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/ViewInGreptile.svg?v=2\" align=\"right\"></picture></a>Confidence Score: 3/5</h2>\n\n<!-- greptile-risk -->\n\nBlock merging until mirror-supplied download hosts cannot direct requests to local or private services.\n\n<h2><a href=\"https://app.greptile.com/api/ide/codex?prompt=IMPORTANT%3A%20Work%20in%20the%20repository%20%22ashcoft%2Flibgen-calibre-store-plugin%22%20on%20the%20existing%20branch%20%22mergify%2Fmerge-queue%2F635af4d7dc%22.%20Checkout%20that%20branch%20%E2%80%94%20do%20NOT%20create%20a%20new%20branch%20or%20open%20a%20new%20PR.%20Push%20your%20changes%20to%20%22mergify%2Fmerge-queue%2F635af4d7dc%22.%0A%0A%23%23%23%20Issue%201%0Alibgen_plugin.py%3A183-192%0A%60resolve_spa_download%60%20sends%20a%20POST%20to%20any%20HTTP%28S%29%20host%20named%20in%20the%20mirror%E2%80%99s%20%60links%60%20response.%20A%20compromised%20mirror%20can%20return%20%60http%3A%2F%2F127.0.0.1%3A8080%2F%3Fl%3Dx%60%2C%20causing%20Calibre%20to%20contact%20a%20service%20on%20the%20user%E2%80%99s%20machine%20at%20%60%2Fapi%2Fdecrypt%3Fl%3Dx%60.%20The%20book-ID%20checks%20happen%20after%20that%20request.%20Reject%20local%20and%20private%20destinations%20before%20sending%20requests%2C%20including%20redirects.%0A%0A**How%20this%20was%20verified%3A**%20Mirror-supplied%20URLs%20retain%20their%20host%20when%20%60decrypt_url%60%20is%20built%20and%20reach%20%60load_json%60%20without%20a%20destination%20check.%0A%0A%23%23%23%20Issue%202%0Alibgen_plugin.py%3A122%0A%60search_spa%60%20keeps%20every%20page%20in%20memory%20until%20all%20requested%20pages%20finish.%20If%20a%20later%20page%20times%20out%20or%20returns%20an%20API%20error%2C%20the%20exception%20discards%20books%20already%20found.%20Return%20the%20collected%20results%20after%20a%20later-page%20failure%2C%20or%20yield%20books%20as%20pages%20arrive%2C%20while%20still%20reporting%20a%20first-page%20failure.%0A%0A%23%23%23%20Issue%203%0Atests%2Ftest_libgen_plugin.py%3A204-205%0A%60QApplication%60%20is%20created%20only%20when%20this%20file%20runs%20directly.%20A%20standard%20unittest%20or%20pytest%20runner%20imports%20the%20file%20instead%2C%20so%20the%20settings%20test%20creates%20widgets%20without%20an%20application%20and%20can%20abort%20the%20test%20process.%20Create%20and%20retain%20the%20application%20in%20a%20module%20or%20class%20setup%20hook.%0A%0A%23%23%23%20Issue%204%0Atests%2Ftest_libgen_plugin.py%3A204-208%0AThe%20new%20tests%20are%20not%20run%20by%20CI.%20The%20plugin%20job%20only%20byte-compiles%20%60__init__.py%60%20and%20%60libgen_plugin.py%60%3B%20the%20other%20test%20workflow%20runs%20unrelated%20agent%20tests.%20Add%20a%20job%20with%20Calibre%20and%20headless%20Qt%20that%20runs%20this%20suite%20so%20search%2C%20download%2C%20and%20settings%20regressions%20can%20fail%20the%20merge%20checks.%0A%0ANote%3A%20If%20this%20suggestion%20doesn't%20match%20your%20team's%20coding%20style%2C%20reply%20to%20this%20and%20let%20me%20know.%20I'll%20remember%20it%20for%20next%20time!%0A%0A---%0A%0AFor%20each%20issue%20above%2C%20determine%20whether%20it%20is%20valid%20and%20should%20be%20fixed.%20If%20so%2C%20fix%20it%20directly.&expires=1795317419&sig=dcbfc7a764c843c97c6db5b2abb0f1f077b7172412da4bde3de1d9c4ac7a01ac&repo=ashcoft%2Flibgen-calibre-store-plugin&pr=4&platform=github\"><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/FixAllInCodexDark.svg?v=7\"><source media=\"(prefers-color-scheme: light)\" srcset=\"https://greptile-static-assets.s3.amazonaws.com/badges/FixAllInCodex.svg?v=7\"><img alt=\"Fix All in Codex\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/FixAllInCodex.svg?v=7\" align=\"right\"></picture></a>Findings</h2>\n\n1. <img alt=\"P1\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p1.svg?v=9\" align=\"top\">&nbsp;<img alt=\"Security\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/Security.svg?v=2\" align=\"top\">&nbsp;**Mirrors can contact private services** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4#discussion_r4576838081\">▶</a>\n2. <img alt=\"P2\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p2.svg?v=9\" align=\"top\">&nbsp;**Later failures hide found books** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4#discussion_r4576838085\">▶</a>\n3. <img alt=\"P2\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p2.svg?v=9\" align=\"top\">&nbsp;**Test discovery lacks an application** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4#discussion_r4576838087\">▶</a>\n4. <img alt=\"P2\" src=\"https://greptile-static-assets.s3.amazonaws.com/badges/p2.svg?v=9\" align=\"top\">&nbsp;**CI skips the plugin tests** <a href=\"https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4#discussion_r4576838094\">▶</a>\n\n<details><summary>Fix with agent prompt</summary>\n\n`````markdown\n### Issue 1\nlibgen_plugin.py:183-192\n`resolve_spa_download` sends a POST to any HTTP(S) host named in the mirror’s `links` response. A compromised mirror can return `http://127.0.0.1:8080/?l=x`, causing Calibre to contact a service on the user’s machine at `/api/decrypt?l=x`. The book-ID checks happen after that request. Reject local and private destinations before sending requests, including redirects.\n\n**How this was verified:** Mirror-supplied URLs retain their host when `decrypt_url` is built and reach `load_json` without a destination check.\n\n### Issue 2\nlibgen_plugin.py:122\n`search_spa` keeps every page in memory until all requested pages finish. If a later page times out or returns an API error, the exception discards books already found. Return the collected results after a later-page failure, or yield books as pages arrive, while still reporting a first-page failure.\n\n### Issue 3\ntests/test_libgen_plugin.py:204-205\n`QApplication` is created only when this file runs directly. A standard unittest or pytest runner imports the file instead, so the settings test creates widgets without an application and can abort the test process. Create and retain the application in a module or class setup hook.\n\n### Issue 4\ntests/test_libgen_plugin.py:204-208\nThe new tests are not run by CI. The plugin job only byte-compiles `__init__.py` and `libgen_plugin.py`; the other test workflow runs unrelated agent tests. Add a job with Calibre and headless Qt that runs this suite so search, download, and settings regressions can fail the merge checks.\n\nNote: If this suggestion doesn't match your team's coding style, reply to this and let me know. I'll remember it for next time!\n\n---\n\nFor each issue above, determine whether it is valid and should be fixed. If so, fix it directly.\n`````\n\n</details>\n\n<h3>Summary</h3>\n\nAdds selectable mirrors and JSON-based search and download support.\n- Calibre searches use the mirror saved in plugin settings.\n- JSON mirrors return book results page by page.\n- Calibre resolves JSON and legacy book pages into download links.\n- Calibre labels this release as version 1.6.0.\n\n<details open><summary><h3>Diagram</h3></summary>\n\n```mermaid\n%%{init: {'theme': 'neutral'}}%%\nflowchart TD\n  A[Selected mirror] --> B{Frontend}\n  B -->|Legacy| C[Read HTML results]\n  B -->|JSON| D[Read paged search results]\n  D --> E[Load download landing URLs]\n  E --> F[POST to landing host]\n  F --> G[Check book ID and file URL]\n  C --> H[Read download page]\n  H --> I[Return file URL]\n  G --> I\n```\n</details>\n\n<!-- greptile_confidence_score:3 -->\n\n<sub>Reviews (1) · Last reviewed commit: [\"Merge of #3\"](https://github.com/ashcoft/libgen-calibre-store-plugin/commit/1adb7a725469e6dc1e5bbd50520448dc2169591c) · [Reviewed by Greptile](https://www.greptile.com/?utm_source=greptile_review&utm_medium=github&utm_campaign=review_public&utm_content=ashcoft/libgen-calibre-store-plugin)</sub>\n\n<!-- /greptile_comment -->",
+  "closedAt": "2026-11-15T03:13:16Z",
+  "comments": [
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmpSx0g",
+      "author": {
+        "login": "aviator-app"
+      },
+      "authorAssociation": "NONE",
+      "body": "# Current Aviator status\n> Aviator will automatically update this comment as the status of the PR changes.\n> Comment `/aviator refresh` to force Aviator to re-examine your PR (or [learn about other `/aviator` commands](https://docs.aviator.co/reference/slash-commands)).\n\n\nThis PR is currently in state `closed` (PR closed manually).\n\n---\n<div id=\"aviator-app-message\">\n  See the real-time status of this PR on the\n  <a class=\"promote-aviator-app\" href=\"https://app.aviator.co/repo/ashcoft/libgen-calibre-store-plugin/pull/4\" target=\"_blank\">Aviator webapp</a>.\n</div>\n\n<div id=\"chrome-ext-message\">\n  Use the <a href=\"https://chrome.google.com/webstore/detail/inoabloekooadaolcncfmpgafkgbgnif\" target='_blank'>Aviator Chrome Extension</a>\n  to see the status of your PR within GitHub.\n</div>",
+      "createdAt": "2026-11-15T03:12:54Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4#issuecomment-6888403410",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmpS0VQ",
+      "author": {
+        "login": "coderabbitai"
+      },
+      "authorAssociation": "NONE",
+      "body": "<!-- coderabbit-ai-generated:v1 -->\n\n<!-- This is an auto-generated comment: summarize by coderabbit.ai -->\n<!-- This is an auto-generated comment: skip review by coderabbit.ai -->\n\n> [!IMPORTANT]\n> ## Review skipped\n> \n> Bot user detected.\n> \n> To trigger a single review, invoke the `@coderabbitai review` command.\n> \n> <details>\n> <summary><strong><picture><source media=\"(prefers-color-scheme: dark)\" srcset=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/cog-dark.svg\"><img src=\"https://storage.googleapis.com/coderabbit_public_assets/review-comment-icons-v1/cog.svg\" width=\"16\" height=\"16\" align=\"absmiddle\" alt=\"\"></picture> Run configuration</strong></summary>\n> <dl>\n> <dd>\n> <br>\n> \n> - **Source mode**: Auto\n> - **Repository**: Unavailable\n> - **Branch**: Unavailable\n> - **File**: No configuration file from this repository applied\n> - **Commit**: Unavailable\n> - **Layers**: defaults\n> - **Review profile**: CHILL\n> - **Plan**: Advanced\n> - **Run ID**: `a0e0777e-027d-4db1-b4c3-24868c1effb1`\n> \n> </dd>\n> </dl>\n> </details>\n> \n> You can disable this status message by setting the `reviews.review_status` to `false` in the CodeRabbit configuration file.\n> \n> Use the checkbox below for a quick retry:\n> - [ ] <!-- {\"checkboxId\":\"e9bb8d72-00e8-4f67-9cb2-caf3b22574fe\"} --> Trigger review\n\n<!-- end of auto-generated comment: skip review by coderabbit.ai -->\n\n<!-- autopilot:start -->\n- [ ] <!-- {\"checkboxId\":\"2708ad07-9f24-4260-9c11-7dc76a49f2e3\"} --> <strong title=\"Keep fixing CodeRabbit findings and required CI, and resolving merge conflicts\">Autofix</strong> · Keep fixing CodeRabbit findings and required CI, and resolving merge conflicts\n<!-- autopilot:end -->\n<!-- tips_start -->\n\n\n\nThanks for using [CodeRabbit](https://coderabbit.ai?utm_source=oss&utm_medium=github&utm_campaign=ashcoft/libgen-calibre-store-plugin&utm_content=4)! It's free for OSS, and your support helps us grow. If you like it, consider giving us a shout-out.\n\n<details>\n<summary><strong>Share</strong></summary>\n<dl>\n<dd>\n<br>\n\n- [X](https://twitter.com/intent/tweet?text=I%20just%20used%20%40coderabbitai%20for%20my%20code%20review%2C%20and%20it%27s%20fantastic%21%20It%27s%20free%20for%20OSS%20and%20offers%20a%20free%20trial%20for%20the%20proprietary%20code.%20Check%20it%20out%3A&url=https%3A//coderabbit.ai)\n- [Mastodon](https://mastodon.social/share?text=I%20just%20used%20%40coderabbitai%20for%20my%20code%20review%2C%20and%20it%27s%20fantastic%21%20It%27s%20free%20for%20OSS%20and%20offers%20a%20free%20trial%20for%20the%20proprietary%20code.%20Check%20it%20out%3A%20https%3A%2F%2Fcoderabbit.ai)\n- [Reddit](https://www.reddit.com/submit?title=Great%20tool%20for%20code%20review%20-%20CodeRabbit&text=I%20just%20used%20CodeRabbit%20for%20my%20code%20review%2C%20and%20it%27s%20fantastic%21%20It%27s%20free%20for%20OSS%20and%20offers%20a%20free%20trial%20for%20proprietary%20code.%20Check%20it%20out%3A%20https%3A//coderabbit.ai)\n- [LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fcoderabbit.ai&mini=true&title=Great%20tool%20for%20code%20review%20-%20CodeRabbit&summary=I%20just%20used%20CodeRabbit%20for%20my%20code%20review%2C%20and%20it%27s%20fantastic%21%20It%27s%20free%20for%20OSS%20and%20offers%20a%20free%20trial%20for%20proprietary%20code)\n\n</dd>\n</dl>\n</details>\n\n<!-- tips_end -->",
+      "createdAt": "2026-11-15T03:12:57Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4#issuecomment-6888404053",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmpS25Q",
+      "author": {
+        "login": "sourcery-ai"
+      },
+      "authorAssociation": "NONE",
+      "body": "<!-- Generated by sourcery-ai[bot]: start review_guide -->\n\n## Reviewer's Guide\n\n### API\n\nUpdate the Calibre store's version and plugin-loading version for the 1.6.0 release.\n- `__init__.py` L3, L14\n\n### Implementation\n\nAdd JSON API searching, pagination, download-link resolution, and mirror health checks alongside the legacy HTML flow.\n- `libgen_plugin.py` L24-37, L59-69, L91-256 (+5 small edits)\n\nMake legacy result construction and download lookup use the selected mirror and accept only relevant download links, with bounded retries.\n- `libgen_plugin.py` L339-355, L375-417, L428-454 (+4 small edits)\n\n### UI\n\nExpose mirror selection in plugin settings and apply the saved choice to searches and opening the store.\n- `libgen_plugin.py` L466-469, L472 (removed lines)\n\n### Documentation\n\nDocument release packaging, mirror selection, the JSON and legacy frontends, and which search operators apply to each.\n- `README.md` L13-16, L23-35, L41-42\n\n### Tests\n\nAdd coverage for legacy and API search, download resolution, errors, retries, and persisted mirror settings.\n- `tests/test_libgen_plugin.py` L1-208\n\n---\n\n<details>\n<summary>Tips and commands</summary>\n\n#### Interacting with Sourcery\n\n- **Trigger a new review:** Comment `@sourcery-ai review` on the pull request.\n- **Continue discussions:** Reply directly to Sourcery's review comments.\n- **Generate a GitHub issue from a review comment:** Ask Sourcery to create an\n  issue from a review comment by replying to it. You can also reply to a\n  review comment with `@sourcery-ai issue` to create an issue from it.\n- **Generate a pull request title:** Write `@sourcery-ai` anywhere in the pull\n  request title to generate a title at any time. You can also comment\n  `@sourcery-ai title` on the pull request to (re-)generate the title at any time.\n- **Generate a pull request summary:** Write `@sourcery-ai summary` anywhere in\n  the pull request body to generate a PR summary at any time exactly where you\n  want it. You can also comment `@sourcery-ai summary` on the pull request to\n  (re-)generate the summary at any time.\n- **Generate reviewer's guide:** Comment `@sourcery-ai guide` on the pull\n  request to (re-)generate the reviewer's guide at any time.\n- **Resolve all Sourcery comments:** Comment `@sourcery-ai resolve` on the\n  pull request to resolve all Sourcery comments. Useful if you've already\n  addressed all the comments and don't want to see them anymore.\n- **Dismiss all Sourcery reviews:** Comment `@sourcery-ai dismiss` on the pull\n  request to dismiss all existing Sourcery reviews. Especially useful if you\n  want to start fresh with a new review - don't forget to comment\n  `@sourcery-ai review` to trigger a new review!\n\n#### Customizing Your Experience\n\nAccess your [dashboard](https://app.sourcery.ai/dashboard/review-settings?connection=github&owner=ashcoft&from_surface=github_bot&intent=review_settings) to:\n- Enable or disable review features such as the Sourcery-generated pull request\n  summary, the reviewer's guide, and others.\n- Change the review language.\n- Add, remove or edit custom review instructions.\n- Adjust other review settings.\n\n#### Getting Help\n\n- [Contact our support team](mailto:support@sourcery.ai) for questions or feedback.\n- Visit our [documentation](https://docs.sourcery.ai) for detailed guides and information.\n- Keep in touch with the Sourcery team by following us on [X/Twitter](https://x.com/SourceryAI), [LinkedIn](https://www.linkedin.com/company/sourcery-ai/) or [GitHub](https://github.com/sourcery-ai).\n\n</details>\n\n<!-- Generated by sourcery-ai[bot]: end review_guide -->",
+      "createdAt": "2026-11-15T03:13:01Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4#issuecomment-6888404709",
+      "viewerDidAuthor": false
+    },
+    {
+      "id": "IC_kwDOOsV3ms8AAAABmpTKBA",
+      "author": {
+        "login": "codacy-production"
+      },
+      "authorAssociation": "NONE",
+      "body": "## Not up to standards ⛔\n<details><summary><strong>🔴 Issues</strong>  <code>1 high · 1 medium</code></summary>\n\n> <br/>\n>\n> \n> **Alerts:**\n> ⚠ 2 issues (≤ 0 issues of at least minor severity)\n> \n>\n> **Results:**\n> `2` new issues\n>\n> | Category | Results |\n> | ------------- | ------------- |\n> | Security | `1` medium <br/> `1` high  |\n>\n>\n> [View in Codacy](https://app.codacy.com/gh/ashcoft/libgen-calibre-store-plugin/pull-requests/4/issues)\n> <br/>\n</details>\n\n<details><summary><strong>🟢 Metrics</strong>  <code>98 complexity · 0 duplication</code></summary>\n\n> <br/>\n>\n> | Metric | Results |\n> | ------------- | ------------- |\n> | Complexity |  **98** | \n > | Duplication |  **0** |\n>\n>\n> [View in Codacy](https://app.codacy.com/gh/ashcoft/libgen-calibre-store-plugin/pull-requests/4/files)\n> <br/>\n</details>\n\n\n\n\n\n<sub>`NEW` Get contextual insights on your PRs based on Codacy's metrics, along with PR and Jira context, without leaving GitHub. [Enable AI reviewer](https://app.codacy.com/organizations/gh/ashcoft/integrations/provider)</sub>\n<sub>`TIP` This summary will be updated as you push new changes.</sub>\n\n<!-- a1b2c3d4-e5f6-7890-abcd-ef1234567890 -->",
+      "createdAt": "2026-11-15T03:13:29Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4#issuecomment-6888409604",
+      "viewerDidAuthor": false
+    }
+  ],
+  "createdAt": "2026-11-15T03:12:49Z",
+  "files": [
+    {
+      "path": "README.md",
+      "additions": 19,
+      "deletions": 0,
+      "changeType": "MODIFIED"
+    },
+    {
+      "path": "__init__.py",
+      "additions": 2,
+      "deletions": 2,
+      "changeType": "MODIFIED"
+    },
+    {
+      "path": "libgen_plugin.py",
+      "additions": 275,
+      "deletions": 37,
+      "changeType": "MODIFIED"
+    },
+    {
+      "path": "tests/test_libgen_plugin.py",
+      "additions": 208,
+      "deletions": 0,
+      "changeType": "ADDED"
+    }
+  ],
+  "headRefName": "mergify/merge-queue/635af4d7dc",
+  "labels": [],
+  "mergedAt": null,
+  "number": 4,
+  "reviewDecision": "",
+  "reviews": [
+    {
+      "id": "PRR_kwDOOsV3ms8AAAABYDFaNQ",
+      "author": {
+        "login": "greptile-apps"
+      },
+      "authorAssociation": "NONE",
+      "body": "",
+      "submittedAt": "2026-11-15T03:16:57Z",
+      "includesCreatedEdit": false,
+      "reactionGroups": [],
+      "state": "COMMENTED",
+      "commit": {
+        "oid": "1adb7a725469e6dc1e5bbd50520448dc2169591c"
+      }
+    }
+  ],
+  "state": "CLOSED",
+  "title": "merge queue: merged #3: Support alternate LibGen mirrors and tagged releases",
+  "updatedAt": "2026-11-15T03:16:59Z",
+  "url": "https://github.com/ashcoft/libgen-calibre-store-plugin/pull/4"
+}
