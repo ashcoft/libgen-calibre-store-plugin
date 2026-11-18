@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "repo_slug": "ashcoft/libgen-calibre-store-plugin",
-  "last_sync_at": "2026-11-18T07:34:19Z",
+  "last_sync_at": "2026-11-18T20:36:31Z",
   "last_activity_at": "2026-11-15T03:16:59Z",
   "cursors": {
-    "issues": "2026-11-18T07:34:19Z",
-    "pulls": "2026-11-18T07:34:19Z",
-    "discussions": "2026-11-18T07:34:19Z",
-    "commits": "2026-11-18T07:34:19Z"
+    "issues": "2026-11-18T20:36:31Z",
+    "pulls": "2026-11-18T20:36:31Z",
+    "discussions": "2026-11-18T20:36:31Z",
+    "commits": "2026-11-18T20:36:31Z"
   },
-  "last_run_url": "https://github.com/ashcoft/libgen-calibre-store-plugin/actions/runs/44259876472",
+  "last_run_url": "https://github.com/ashcoft/libgen-calibre-store-plugin/actions/runs/44392751750",
   "created_at": "2026-11-14T22:28:50.660Z",
-  "updated_at": "2026-11-18T07:34:23.029Z"
+  "updated_at": "2026-11-18T20:36:33.023Z"
 }
